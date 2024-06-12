@@ -6,30 +6,39 @@ class User(AbstractUser):
     address = models.CharField(max_length=120)
     phone = models.CharField(max_length=120)
 
+    class Meta:
+        ordering = ["username"]
+
 
 class Store(models.Model):
     name = models.CharField(max_length=120)
     address = models.CharField(max_length=120)
     description = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     class CategoryChoices(models.TextChoices):
-        ELECTRONICS = 'Electronics'
-        FASHION = 'Fashion'
-        FURNITURE = 'Furniture & Decor'
-        HEALTH_BEAUTY = 'Health,Personal Care & Beauty'
-        HOUSEHOLD = 'Household Item'
-        BOOKS_GAMES = 'Books,Movies,Music & Games'
-        TOYS = 'Toys & Hobbies'
+        ELECTRONICS = "Electronics"
+        FASHION = "Fashion"
+        FURNITURE = "Furniture & Decor"
+        HEALTH_BEAUTY = "Health,Personal Care & Beauty"
+        HOUSEHOLD = "Household Item"
+        BOOKS_GAMES = "Books,Movies,Music & Games"
+        TOYS = "Toys & Hobbies"
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     price = models.FloatField()
     stock = models.IntegerField()
-    image = models.ImageField(upload_to='products')
+    image = models.ImageField(upload_to="products")
     category = models.TextField(choices=CategoryChoices.choices)
-    store = models.OneToOneField(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Order(models.Model):
@@ -62,8 +71,8 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('product', 'user')
-        ordering = '-created_at'
+        unique_together = ("product", "user")
+        ordering = ("-created_at",)
 
 
 class Cart(models.Model):
