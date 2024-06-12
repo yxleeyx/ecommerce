@@ -7,10 +7,11 @@ ENV/
 .env
 
 # idea folder
-*/.idea/
+**/.idea
 
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/
+*.pyc
 
 # database
 /backend/db.sqlite3
