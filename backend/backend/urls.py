@@ -30,11 +30,11 @@ class Query(accounts.schema.Query, app.schema.Query, graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
-class Mutations(accounts.schema.mutations, graphene.ObjectType):
+class Mutations(accounts.schema.Mutation, graphene.ObjectType):
     pass
 
 
-schema = graphene.Schema(query=Query)
+schema = graphene.Schema(query=Query, mutation=Mutations)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
