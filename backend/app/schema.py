@@ -144,7 +144,7 @@ class DeleteProduct(graphene.Mutation, SuccessErrorsOutput):
 
             return DeleteProduct()
         except ObjectDoesNotExist:
-            return DeleteProduct(success=False, errors="product does not exist")
+            return DeleteProduct(success=False, errors="errors in deleting, product does not exist")
 
 
 class CreateOrder(SerializerMutation):
@@ -158,8 +158,39 @@ class CreateReview(SerializerMutation):
 
 
 class AddToCart(SerializerMutation):
-    class Arguments:
+    class Meta:
         serializer_class = CartSerializer
+
+
+class UpdateCart(graphene.Mutation, SuccessErrorsOutput):
+    class Arguments:
+        user_id = graphene.Int()
+        product_id = graphene.Int()
+        quantity = graphene.Int()
+
+    def mutate(self, info, user_id, product_id, quantity):
+        try:
+            user = get_user_model().objects.get(pk=user_id)
+            product = Product.objects.get(pk=product_id)
+            cart = Cart.objects.get(user=user, product=product)
+            cart.quantity = quantity
+
+            return UpdateCart()
+        except ObjectDoesNotExist:
+            return UpdateCart(success=False, errors="error in updating cart")
+
+
+class DeleteCart(graphene.Mutation, SuccessErrorsOutput):
+    class Arguments:
+        pk = graphene.Int()
+
+    def mutate(self, info, pk):
+        try:
+            Cart.objects.get(pk=pk).delete()
+
+            return DeleteCart()
+        except ObjectDoesNotExist:
+            return DeleteCart(success=False, errors="error in deleting, cart does not exist")
 
 
 class Mutations(graphene.ObjectType):
@@ -169,3 +200,5 @@ class Mutations(graphene.ObjectType):
     create_order = CreateOrder.Field()
     create_review = CreateReview.Field()
     add_to_cart = AddToCart.Field()
+    update_cart = UpdateCart.Field()
+    remove_from_cart = DeleteCart.Field()

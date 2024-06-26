@@ -33,7 +33,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     price = models.FloatField()
     stock = models.IntegerField()
-    image = models.ImageField(upload_to="products")
+    image = models.ImageField(upload_to="products", default="no_image.png")
     category = models.TextField(choices=CategoryChoices.choices)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
 
