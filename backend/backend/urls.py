@@ -30,7 +30,7 @@ class Query(accounts.schema.Query, app.schema.Query, graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
-class Mutations(accounts.schema.Mutation, graphene.ObjectType):
+class Mutations(accounts.schema.Mutation, app.schema.Mutations, graphene.ObjectType):
     pass
 
 
