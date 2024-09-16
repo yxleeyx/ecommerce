@@ -504,7 +504,7 @@ export type MutationsPasswordSetArgs = {
 
 
 export type MutationsRefreshTokenArgs = {
-  token?: InputMaybe<Scalars['String']['input']>;
+  refreshToken?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -622,6 +622,7 @@ export type ObtainJsonWebToken = {
   errors?: Maybe<Scalars['ExpectedErrorType']['output']>;
   payload?: Maybe<Scalars['GenericScalar']['output']>;
   refreshExpiresIn?: Maybe<Scalars['Int']['output']>;
+  refreshToken?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
   token?: Maybe<Scalars['String']['output']>;
   unarchiving?: Maybe<Scalars['Boolean']['output']>;
@@ -669,6 +670,7 @@ export type PageInfo = {
 export type PasswordChange = {
   __typename?: 'PasswordChange';
   errors?: Maybe<Scalars['ExpectedErrorType']['output']>;
+  refreshToken?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
   token?: Maybe<Scalars['String']['output']>;
 };
@@ -795,6 +797,7 @@ export type RefreshToken = {
   errors?: Maybe<Scalars['ExpectedErrorType']['output']>;
   payload?: Maybe<Scalars['GenericScalar']['output']>;
   refreshExpiresIn?: Maybe<Scalars['Int']['output']>;
+  refreshToken?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
   token?: Maybe<Scalars['String']['output']>;
 };
@@ -822,6 +825,7 @@ export type RefreshToken = {
 export type Register = {
   __typename?: 'Register';
   errors?: Maybe<Scalars['ExpectedErrorType']['output']>;
+  refreshToken?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
   token?: Maybe<Scalars['String']['output']>;
 };
