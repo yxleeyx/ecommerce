@@ -13,7 +13,7 @@ Key Features:
 
 ### Technologies Used
 This web application is built using the microservice architecture approach, compromising of 2 services - frontend and backend.
-Frontend is built using Svelte, and the backend is built using python Django and GraphQL.
+Frontend is built using Svelte, and the backend is built using Django and GraphQL.
 
 
 ### How to Install and Run the Project
