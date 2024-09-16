@@ -31,7 +31,7 @@ class Query(accounts.schema.Query, app.schema.Query, graphene.ObjectType):
 
 
 class Mutations(accounts.schema.Mutation, app.schema.Mutations, graphene.ObjectType):
-    pass
+    debug = graphene.Field(DjangoDebug, name="_debug")
 
 
 schema = graphene.Schema(query=Query, mutation=Mutations)
