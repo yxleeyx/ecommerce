@@ -40,7 +40,7 @@ export const RENEW_TOKEN_MUTATION = gql<{ refreshToken: RefreshToken }, Mutation
 	}
 `;
 export const LOGOUT_MUTATION = gql<{ revokeToken: RevokeToken }, MutationsRevokeTokenArgs>`
-	mutation Logout($refreshToken: RefreshToken!) {
+	mutation Logout($refreshToken: String!) {
 		revokeToken(refreshToken: $refreshToken) {
 			revoked
 			success
