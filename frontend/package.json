@@ -36,6 +36,8 @@
 	"type": "module",
 	"dependencies": {
 		"@urql/exchange-auth": "^2.2.0",
-		"@urql/svelte": "^4.2.1"
+		"@urql/svelte": "^4.2.1",
+		"jwt-decode": "^4.0.0",
+		"svelte-use-form": "^2.10.0"
 	}
 }
