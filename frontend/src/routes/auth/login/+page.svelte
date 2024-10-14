@@ -2,6 +2,8 @@
 	import { goto } from "$app/navigation";
 	import { useForm, Hint, validators, email, required, HintGroup } from "svelte-use-form";
 
+	import { Button } from "$lib/components/ui/button";
+
 	import authService from "$lib/services/auth.service";
 	import { saveAuthTokens } from "$lib/services/local-storage.service";
 
@@ -39,11 +41,11 @@
 
 	<form use:form on:submit={onLogin}>
 		<label>
-			Username: <input name="username" placeholder="Username" bind:value={username} use:validators={[required]} />
+			Username <input name="username" placeholder="Username" bind:value={username} use:validators={[required]} />
 			<Hint for="username" on="required">This is a mandatory field</Hint>
 		</label>
 		<label>
-			Password: <input
+			Password <input
 				type="password"
 				name="password"
 				placeholder="Password"
@@ -52,6 +54,6 @@
 			/>
 			<Hint for="password" on="required">This is a mandatory field</Hint>
 		</label>
-		<button type="submit" disabled={!$form.valid}>LOGIN</button>
+		<Button type="submit" disabled={!$form.valid}>LOGIN</Button>
 	</form>
 </div>
