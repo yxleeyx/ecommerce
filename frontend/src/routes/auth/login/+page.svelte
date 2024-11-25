@@ -27,7 +27,7 @@
 			isLoading = true;
 			const data = await authService.login(username, password);
 			saveAuthTokens(data!.tokenAuth.token as string, data!.tokenAuth.refreshToken as string);
-			goto("/dashboard");
+			goto("/homepage");
 		} catch (e) {
 			handleError(e);
 		} finally {

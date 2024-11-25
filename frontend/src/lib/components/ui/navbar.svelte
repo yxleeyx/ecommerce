@@ -47,20 +47,18 @@
 					<div class="flex space-x-4">
 						<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 						<a
-							href="/dashboard"
+							href="/homepage"
 							class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-							aria-current="page">Dashboard</a
+							aria-current="page">Home</a
 						>
 						<a
 							href="/stores"
 							class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
 							>Stores</a
 						>
-						<div>
-							<Command.Root>
-								<Command.Input placeholder="Search" />
-							</Command.Root>
-						</div>
+						<Command.Root>
+							<Command.Input placeholder="Search" />
+						</Command.Root>
 					</div>
 				</div>
 			</div>
