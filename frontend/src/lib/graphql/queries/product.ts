@@ -28,3 +28,20 @@ export const ALL_STORES_QUERY = gql`
 		}
 	}
 `;
+
+export const STORE_QUERY = gql`
+	query GetStore($name: String!) {
+		store(name: $name) {
+			id
+			name
+			description
+			address
+			products {
+				name
+				description
+				image
+				price
+			}
+		}
+	}
+`;

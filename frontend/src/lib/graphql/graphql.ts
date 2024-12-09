@@ -271,6 +271,7 @@ export type ErrorType = {
 
 export type Mutations = {
   __typename?: 'Mutations';
+  _debug?: Maybe<DjangoDebug>;
   addToCart?: Maybe<AddToCartPayload>;
   /**
    * Archive account and revoke refresh tokens.
@@ -912,7 +913,7 @@ export type StoreType = {
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  productSet: Array<ProductType>;
+  products: Array<ProductType>;
 };
 
 /**
