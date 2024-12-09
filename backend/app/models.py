@@ -35,7 +35,7 @@ class Product(models.Model):
     stock = models.IntegerField()
     image = models.ImageField(upload_to="products", default="no_image.png")
     category = models.TextField(choices=CategoryChoices.choices)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="products")
 
     def __str__(self):
         return self.name

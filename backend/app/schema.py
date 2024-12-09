@@ -21,6 +21,9 @@ class StoreType(DjangoObjectType):
         model = Store
         fields = "__all__"
 
+    def resolve_products(self: Store, info):
+        return list(Product.objects.filter(store_id=self.id))
+
 
 class ProductType(DjangoObjectType):
     class Meta:
@@ -63,39 +66,50 @@ class Query(graphene.ObjectType):
     review = graphene.List(ReviewType, product_id=graphene.Int())
     cart = graphene.List(CartType)
 
+    @staticmethod
     def resolve_store(self, info, name):
-        return Store.objects.filter(name__iexact=name)
+        try:
+            return Store.objects.get(name__iexact=name)
+        except ObjectDoesNotExist:
+            return None
 
+    @staticmethod
     def resolve_stores(self, info):
-        return Store.objects.all()
+        return list(Store.objects.all())
 
     def resolve_product(self, info, name):
-        return Product.objects.filter(name__contains=name)
+        try:
+            return Product.objects.get(name__contains=name)
+        except ObjectDoesNotExist:
+            return None
 
     def resolve_products(self, info):
-        return Product.objects.all()
+        return list(Product.objects.all())
 
     @login_required
     def resolve_orders(self, info):
         user = info.context.user
-        return Order.objects.filter(user=user)
+        return list(Order.objects.filter(user=user))
 
     @login_required
     def resolve_order(self, info, id):
         user = info.context.user
-        return Order.objects.get(user=user, pk=id)
+        try:
+            return Order.objects.get(user=user, pk=id)
+        except ObjectDoesNotExist:
+            return None
 
     def resolve_order_items(self, info, order_id):
         order = Order.objects.get(pk=order_id)
-        return OrderItem.objects.filter(order=order)
+        return list(OrderItem.objects.filter(order=order))
 
     def resolve_review(self, info, product_id):
         product = Product.objects.get(pk=product_id)
-        return Review.objects.filter(product=product)
+        return list(Review.objects.filter(product=product))
 
     def resolve_carts(self, info):
         user = info.context.user
-        return Cart.objects.filter(user=user)
+        return list(Cart.objects.filter(user=user))
 
 
 class CreateProduct(SerializerMutation):
