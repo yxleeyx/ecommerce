@@ -18,7 +18,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = "__all__"
+        exclude = ["id", "created_at"]
 
 
 class CartSerializer(serializers.ModelSerializer):

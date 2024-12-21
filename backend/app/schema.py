@@ -30,6 +30,9 @@ class ProductType(DjangoObjectType):
         model = Product
         fields = "__all__"
 
+    def resolve_review_set(self, info):
+        return list(Review.objects.filter(product=self))
+
 
 class OrderType(DjangoObjectType):
     class Meta:
@@ -169,6 +172,18 @@ class CreateOrder(SerializerMutation):
 class CreateReview(SerializerMutation):
     class Meta:
         serializer_class = ReviewSerializer
+
+    @classmethod
+    def get_serializer_kwargs(cls, root, info, **input):
+        context = super().get_serializer_kwargs(root, info, **input)
+
+        return context
+
+    @classmethod
+    def mutate_and_get_payload(self, root, info, **input):
+        context = super().mutate_and_get_payload(root, info, **input)
+
+        return context
 
 
 class AddToCart(SerializerMutation):
