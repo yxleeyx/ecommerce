@@ -1,5 +1,13 @@
 import { gql } from "@urql/svelte";
-import type { ProductType, StoreType } from "../graphql";
+import type {
+	CreateReviewInput,
+	MutationsCreateReviewArgs,
+	ProductType,
+	QueryReviewArgs,
+	QueryStoreArgs,
+	ReviewType,
+	StoreType
+} from "../graphql";
 
 export const ALL_PRODUCTS_QUERY = gql`
 	query GetAllProducts {
@@ -14,11 +22,14 @@ export const ALL_PRODUCTS_QUERY = gql`
 			store {
 				name
 			}
+			reviewSet {
+				rating
+			}
 		}
 	}
 `;
 
-export const ALL_STORES_QUERY = gql`
+export const ALL_STORES_QUERY = gql<{ stores: StoreType[] }>`
 	query GetAllStores {
 		stores {
 			id
@@ -29,7 +40,7 @@ export const ALL_STORES_QUERY = gql`
 	}
 `;
 
-export const STORE_QUERY = gql`
+export const STORE_QUERY = gql<{ store: StoreType }>`
 	query GetStore($name: String!) {
 		store(name: $name) {
 			id
@@ -42,6 +53,25 @@ export const STORE_QUERY = gql`
 				image
 				price
 			}
+		}
+	}
+`;
+
+export const REVIEW_RATING_QUERY = gql<{ review: ReviewType[] }>`
+	query GetReviewRating($productId: Int!) {
+		review(productId: $productId) {
+			rating
+		}
+	}
+`;
+
+export const CREATE_REVIEW_MUTATION = gql`
+	mutation CreateReview($user: String!, $review: String!, $product: String!, $rating: Int!) {
+		createReview(user: $user, review: $review, product: $product, rating: $rating) {
+			product
+			rating
+			review
+			user
 		}
 	}
 `;

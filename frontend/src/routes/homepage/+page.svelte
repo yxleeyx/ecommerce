@@ -1,15 +1,25 @@
 <script lang="ts">
 	import Navbar from "$lib/components/ui/navbar.svelte";
 	import * as Card from "$lib/components/ui/card";
-	import { ALL_PRODUCTS_QUERY } from "$lib/graphql/queries/product";
+	import { ALL_PRODUCTS_QUERY, REVIEW_RATING_QUERY } from "$lib/graphql/queries/product";
 	import { queryStore, getContextClient } from "@urql/svelte";
-	import type { ProductType } from "$lib/graphql/graphql";
 	import { Button } from "$lib/components/ui/button";
 
-	const getAllProducts = queryStore<{ products: ProductType[] }>({
+	interface ReviewObj {
+		rating: number;
+	}
+	const getAllProducts = queryStore({
 		client: getContextClient(),
 		query: ALL_PRODUCTS_QUERY
 	});
+
+	function tabulateReviewScore(arrayReviews: Array<ReviewObj>) {
+		let ratings: number;
+		const sumRatings = arrayReviews.reduce((a, b) => a + b.rating, 0);
+		ratings = sumRatings == 0 ? 0 : sumRatings / arrayReviews.length;
+
+		return ratings;
+	}
 </script>
 
 <Navbar />
@@ -27,6 +37,8 @@
 			<Card.Content>
 				<img src={product.image} alt={product.name} />
 				<p>Price: ${product.price}</p>
+				<p>Reviews: {tabulateReviewScore(product.reviewSet)}</p>
+				<p></p>
 			</Card.Content>
 			<Card.Footer>
 				<Button variant="outline">Add to Cart</Button>

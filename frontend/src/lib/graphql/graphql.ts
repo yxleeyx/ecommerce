@@ -164,7 +164,6 @@ export type CreateProductPayload = {
 
 export type CreateReviewInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['Int']['input']>;
   product: Scalars['String']['input'];
   rating: Scalars['Int']['input'];
   review?: InputMaybe<Scalars['String']['input']>;
@@ -174,10 +173,8 @@ export type CreateReviewInput = {
 export type CreateReviewPayload = {
   __typename?: 'CreateReviewPayload';
   clientMutationId?: Maybe<Scalars['String']['output']>;
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** May contain more than one error for same field. */
   errors?: Maybe<Array<Maybe<ErrorType>>>;
-  id?: Maybe<Scalars['Int']['output']>;
   product?: Maybe<Scalars['String']['output']>;
   rating?: Maybe<Scalars['Int']['output']>;
   review?: Maybe<Scalars['String']['output']>;

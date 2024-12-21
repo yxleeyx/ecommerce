@@ -6,7 +6,7 @@
 	import type { StoreType } from "$lib/graphql/graphql";
 	import { Button } from "$lib/components/ui/button";
 
-	const getAllStores = queryStore<{ stores: StoreType[] }>({
+	const getAllStores = queryStore({
 		client: getContextClient(),
 		query: ALL_STORES_QUERY
 	});
