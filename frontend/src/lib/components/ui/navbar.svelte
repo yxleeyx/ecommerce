@@ -67,14 +67,12 @@
 				</div>
 				<div class="hidden sm:ml-6 sm:block">
 					<div class="flex space-x-4">
-						{#key isActive}
-							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-							<a href="/homepage" class={isActive.home ? activeClass : defaultClass} aria-current="page">Home</a>
-							<a href="/store" class={isActive.store ? activeClass : defaultClass}>Stores</a>
-							<Command.Root>
-								<Command.Input placeholder="Search" />
-							</Command.Root>
-						{/key}
+						<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+						<a href="/homepage" class={isActive.home ? activeClass : defaultClass} aria-current="page">Home</a>
+						<a href="/store" class={isActive.store ? activeClass : defaultClass}>Stores</a>
+						<Command.Root>
+							<Command.Input placeholder="Search" />
+						</Command.Root>
 					</div>
 				</div>
 			</div>

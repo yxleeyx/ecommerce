@@ -52,6 +52,9 @@ export const STORE_QUERY = gql<{ store: StoreType }>`
 				description
 				image
 				price
+				reviewSet {
+					rating
+				}
 			}
 		}
 	}

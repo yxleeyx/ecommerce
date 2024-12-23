@@ -4,22 +4,12 @@
 	import { ALL_PRODUCTS_QUERY, REVIEW_RATING_QUERY } from "$lib/graphql/queries/product";
 	import { queryStore, getContextClient } from "@urql/svelte";
 	import { Button } from "$lib/components/ui/button";
+	import { tabulateReviewScore } from "$lib/utils";
 
-	interface ReviewObj {
-		rating: number;
-	}
 	const getAllProducts = queryStore({
 		client: getContextClient(),
 		query: ALL_PRODUCTS_QUERY
 	});
-
-	function tabulateReviewScore(arrayReviews: Array<ReviewObj>) {
-		let ratings: number;
-		const sumRatings = arrayReviews.reduce((a, b) => a + b.rating, 0);
-		ratings = sumRatings == 0 ? 0 : sumRatings / arrayReviews.length;
-
-		return ratings;
-	}
 </script>
 
 <Navbar />

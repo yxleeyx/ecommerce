@@ -6,6 +6,7 @@
 	import type { StoreType } from "$lib/graphql/graphql";
 	import { Button } from "$lib/components/ui/button";
 	import type { PageData } from "./$types";
+	import { tabulateReviewScore } from "$lib/utils";
 
 	export let data: PageData;
 
@@ -44,6 +45,7 @@
 			<Card.Content>
 				<img src={product.image} alt={product.name} />
 				<p>Price: ${product.price}</p>
+				<p>Reviews: {tabulateReviewScore(product.reviewSet)}</p>
 			</Card.Content>
 			<Card.Footer>
 				<Button variant="outline">Add to Cart</Button>

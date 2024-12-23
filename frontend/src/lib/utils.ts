@@ -21,11 +21,7 @@ export const flyAndScale = (
 	const style = getComputedStyle(node);
 	const transform = style.transform === "none" ? "" : style.transform;
 
-	const scaleConversion = (
-		valueA: number,
-		scaleA: [number, number],
-		scaleB: [number, number]
-	) => {
+	const scaleConversion = (valueA: number, scaleA: [number, number], scaleB: [number, number]) => {
 		const [minA, maxA] = scaleA;
 		const [minB, maxB] = scaleB;
 
@@ -35,9 +31,7 @@ export const flyAndScale = (
 		return valueB;
 	};
 
-	const styleToString = (
-		style: Record<string, number | string | undefined>
-	): string => {
+	const styleToString = (style: Record<string, number | string | undefined>): string => {
 		return Object.keys(style).reduce((str, key) => {
 			if (style[key] === undefined) return str;
 			return str + `${key}:${style[key]};`;
@@ -60,3 +54,11 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export function tabulateReviewScore(arrayReviews: Array<{ rating: number }>) {
+	let ratings: number;
+	const sumRatings = arrayReviews.reduce((a, b) => a + b.rating, 0);
+	ratings = sumRatings == 0 ? 0 : sumRatings / arrayReviews.length;
+
+	return ratings;
+}
