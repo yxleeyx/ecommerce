@@ -4,11 +4,33 @@
 
 	import authService from "$lib/services/auth.service";
 	import { getRefreshToken, clearAuthTokens } from "$lib/services/local-storage.service";
+	import { page } from "$app/state";
+	import { onMount } from "svelte";
 
+	onMount(() => {
+		setAsActiveTab(page.url.pathname.substring(1));
+	});
 	let visible = false;
 
 	function toggleVisible() {
 		visible = !visible;
+	}
+
+	const activeClass = "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white";
+	const defaultClass = "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white";
+
+	let isActive = { home: false, store: false };
+	function setAsActiveTab(tab: string) {
+		let key: keyof typeof isActive;
+		for (key in isActive) isActive[key] = false;
+		switch (tab) {
+			case "homepage":
+				isActive.home = true;
+				break;
+			case "store":
+				isActive.store = true;
+				break;
+		}
 	}
 
 	function handleError(error: any) {
@@ -45,20 +67,14 @@
 				</div>
 				<div class="hidden sm:ml-6 sm:block">
 					<div class="flex space-x-4">
-						<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-						<a
-							href="/homepage"
-							class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-							aria-current="page">Home</a
-						>
-						<a
-							href="/store"
-							class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-							>Stores</a
-						>
-						<Command.Root>
-							<Command.Input placeholder="Search" />
-						</Command.Root>
+						{#key isActive}
+							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+							<a href="/homepage" class={isActive.home ? activeClass : defaultClass} aria-current="page">Home</a>
+							<a href="/store" class={isActive.store ? activeClass : defaultClass}>Stores</a>
+							<Command.Root>
+								<Command.Input placeholder="Search" />
+							</Command.Root>
+						{/key}
 					</div>
 				</div>
 			</div>
